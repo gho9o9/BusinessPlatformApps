@@ -54,6 +54,7 @@
     AZURE_LOGIN_SUBTITLE: `To create the solution we will be using a number of Azure Services which require an Azure subscription.`,
     AZURE_LOGIN_UNKNOWN_ERROR: `You do not have any Azure subscriptions linked to your account. You can get started with a free trial by clicking the link at the top of the page.`,
     AX_COLLECTIONS_TEMPLATE_TITLE: `Dynamics 365 for Finance and Operations - Credit and Collections`,
+    AX_WORKFORCE_TEMPLATE_TITLE: `Dynamics 365 for Finance and Operations - Workforce`,
     AX_CUSTOM_URL: `If you can't find your Dynamics 365 for Finance and Operations instance in the dropdown, please enter it below:`,
     AX_LOGIN_CONFIRM: `Confirm connection`,
     AX_LOGIN_CONNECT: `Connect to Dynamics 365`,
