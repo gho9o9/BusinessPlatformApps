@@ -14,25 +14,25 @@ IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='wf' AND T
     DROP TABLE wf.ssas_jobs;
 	
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='wf' AND ROUTINE_NAME='sp_set_process_flag' AND ROUTINE_TYPE='PROCEDURE')
-    DROP PROCEDURE [cc].sp_set_process_flag;
+    DROP PROCEDURE [wf].sp_set_process_flag;
 	
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='wf' AND ROUTINE_NAME='sp_validate_schema' AND ROUTINE_TYPE='PROCEDURE')
-    DROP PROCEDURE [cc].sp_validate_schema;
+    DROP PROCEDURE [wf].sp_validate_schema;
 	
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='wf' AND ROUTINE_NAME='sp_get_current_record_counts' AND ROUTINE_TYPE='PROCEDURE')
-    DROP PROCEDURE [cc].sp_get_current_record_counts;
+    DROP PROCEDURE [wf].sp_get_current_record_counts;
 	
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='wf' AND ROUTINE_NAME='sp_check_record_counts_changed' AND ROUTINE_TYPE='PROCEDURE')
-    DROP PROCEDURE [cc].sp_check_record_counts_changed;
+    DROP PROCEDURE [wf].sp_check_record_counts_changed;
 	
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='wf' AND ROUTINE_NAME='sp_finish_job' AND ROUTINE_TYPE='PROCEDURE')
-    DROP PROCEDURE [cc].sp_finish_job;
+    DROP PROCEDURE [wf].sp_finish_job;
 	
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='wf' AND ROUTINE_NAME='sp_start_job' AND ROUTINE_TYPE='PROCEDURE')
-    DROP PROCEDURE [cc].sp_start_job;
+    DROP PROCEDURE [wf].sp_start_job;
 	
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='wf' AND ROUTINE_NAME='sp_reset_job' AND ROUTINE_TYPE='PROCEDURE')
-    DROP PROCEDURE [cc].sp_reset_job;
+    DROP PROCEDURE [wf].sp_reset_job;
 
 GO
 	
@@ -78,7 +78,7 @@ AS
 BEGIN
 
 	SET NOCOUNT ON;
-    UPDATE [cc].[configuration] 
+    UPDATE [wf].[configuration] 
 	SET [value]=@process_flag
 	WHERE [configuration_group] = 'SolutionTemplate' AND [configuration_subgroup]='SSAS' AND [name]='ProcessOnNextSchedule';
 END
@@ -93,7 +93,7 @@ BEGIN
 	SET NOCOUNT ON;
 	DECLARE @tables NVARCHAR(MAX);
 	SELECT @tables = REPLACE([value],' ','')
-	FROM [cc].[configuration]
+	FROM [wf].[configuration]
 	WHERE configuration_group = 'SolutionTemplate'
 	AND	configuration_subgroup = 'StandardConfiguration' 
 	AND	name = 'Tables'
@@ -122,7 +122,7 @@ BEGIN
 
 	DECLARE @tables NVARCHAR(MAX);
 	SELECT @tables = REPLACE([value],' ','')
-	FROM [cc].[configuration]
+	FROM [wf].[configuration]
 	WHERE configuration_group = 'SolutionTemplate'
 	AND	configuration_subgroup = 'StandardConfiguration' 
 	AND	name = 'Tables'
@@ -168,7 +168,7 @@ END;
 go
 
 -- finish job
-CREATE PROCEDURE [cc].[sp_finish_job]
+CREATE PROCEDURE [wf].[sp_finish_job]
 	@jobid INT,
 	@jobMessage NVARCHAR(MAX)
 AS
@@ -178,11 +178,11 @@ BEGIN
 	EXECUTE @newRowCount = wf.sp_get_current_record_counts;
 
 	IF @jobMessage = 'Success' 
-		UPDATE [cc].[ssas_jobs] 
+		UPDATE [wf].[ssas_jobs] 
 		SET [endTime]=GETDATE(), [statusMessage]=@jobMessage, [lastCount]=@newRowCount
 		WHERE [id] = @jobid;
 	ELSE
-		UPDATE [cc].[ssas_jobs] 
+		UPDATE [wf].[ssas_jobs] 
 		SET [endTime]=GETDATE(), [statusMessage]=@jobMessage
 		WHERE [id] = @jobid;
 END;
@@ -288,11 +288,11 @@ BEGIN
 
 	IF(@checksPassed = 0)
 	BEGIN
-		EXEC [cc].[sp_finish_job] @jobid= @id, @jobMessage= @errorMessage
+		EXEC [wf].[sp_finish_job] @jobid= @id, @jobMessage= @errorMessage
         return 0;
 	END
 
-    EXEC [cc].[sp_set_process_flag] @process_flag = '0'
+    EXEC [wf].[sp_set_process_flag] @process_flag = '0'
 
 	RETURN @id;
 	END;

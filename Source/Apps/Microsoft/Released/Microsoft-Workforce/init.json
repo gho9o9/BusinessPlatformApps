@@ -103,13 +103,13 @@
             {
                 "displayname": "$translate(INIT_ACTION_DEPLOYING_DATABASE_CONFIGURATION)",
                 "name": "Microsoft-SetConfigValueInSql",
-                "SqlConfigTable": "[cc].[configuration]",
+                "SqlConfigTable": "[wf].[configuration]",
                 "SqlServerIndex": "0"
             },
             {
                 "displayname": "$translate(INIT_ACTION_DEPLOYING_DATABASE_CONFIGURATION)",
                 "name": "Microsoft-SetConfigValueInSql",
-                "SqlConfigTable": "[cc].[configuration]",
+                "SqlConfigTable": "[wf].[configuration]",
                 "SqlEntryName": "Tables",
                 "SqlEntryValue": "Workforce_BICalendarOffsetsDimension_MATERIALIZED,Workforce_BICompanyView_MATERIALIZED,Workforce_BIDateDimensionValue_MATERIALIZED,Workforce_HcmBICurrentFixedCompensationEntity_MATERIALIZED,Workforce_HcmBICurrentPositionEntity_MATERIALIZED,Workforce_HCMBICurrentWorkerEntity_MATERIALIZED,Workforce_HcmBIDemographicsEntity_MATERIALIZED,Workforce_HcmBIEmploymentEntity_MATERIALIZED,Workforce_HcmBIFixedCompensationEntity_MATERIALIZED,Workforce_HcmBIJobEntity_MATERIALIZED,Workforce_HcmBIJobPreferredSkillEntity_MATERIALIZED,Workforce_HcmBIMassHireLineEntity_MATERIALIZED,Workforce_HcmBIMassHireProjectEntity_MATERIALIZED,Workforce_HcmBIPastPositionAssignmentEntity_MATERIALIZED,Workforce_HcmBIPerformanceEntity_MATERIALIZED,Workforce_HcmBIPersonSkillEntity_MATERIALIZED,Workforce_HcmBIPositionEntity_MATERIALIZED,Workforce_HcmBIPositionTrendEntity_MATERIALIZED,Workforce_HcmBITerminatedWorkerEntity_MATERIALIZED,Workforce_HcmBIWorkerBenefitEntity_MATERIALIZED,Workforce_HcmBIWorkerNameEntity_MATERIALIZED,Workforce_HcmBIWorkerTitleEntity_MATERIALIZED,Workforce_HcmBIWorkerTrendEntity_MATERIALIZED,Workforce_HcmSkillEntity_MATERIALIZED,Workforce_LogisticsPostalAddressExpanded_MATERIALIZED,Workforce_SRSANALYSISENUMS_MATERIALIZED",
                 "SqlGroup": "SolutionTemplate",
@@ -120,7 +120,7 @@
                 "displayname": "$translate(INIT_ACTION_DEPLOYING_DATABASE_CONFIGURATION)",
                 "name": "Microsoft-SetConfigValueInSql",
                 "skip": "$run(this.MS.DataStore.getValue('ssasDisabled') === 'true' ? 'true': 'false')",
-                "SqlConfigTable": "[cc].[configuration]",
+                "SqlConfigTable": "[wf].[configuration]",
                 "SqlEntryName": "FunctionName",
                 "SqlEntryValue": "$run('asscheduler' + this.MS.DataStore.getValue('uniqueId'))",
                 "SqlGroup": "SolutionTemplate",
@@ -131,7 +131,7 @@
                 "displayname": "$translate(INIT_ACTION_DEPLOYING_DATABASE_CONFIGURATION)",
                 "name": "Microsoft-SetConfigValueInSql",
                 "skip": "$run(this.MS.DataStore.getAllValues('azureSqlDisabled')[0] === 'true' || this.MS.DataStore.getValue('ssasDisabled') === 'true' ? 'true': 'false')",
-                "SqlConfigTable": "[cc].[configuration]",
+                "SqlConfigTable": "[wf].[configuration]",
                 "SqlEntryName": "FunctionName",
                 "SqlEntryValue": "$run('asscheduler' + this.MS.DataStore.getValue('uniqueId'))",
                 "SqlGroup": "SolutionTemplate",
@@ -142,7 +142,7 @@
                 "displayname": "$translate(NOTIFIER_CONFIGURE_NOTIFIER_APP)",
                 "name": "Microsoft-SetConfigValueInSql",
                 "skip": "$run(!this.MS.DataStore.getValue('SendCompletionNotification'))",
-                "SqlConfigTable": "[cc].[configuration]",
+                "SqlConfigTable": "[wf].[configuration]",
                 "SqlEntryName": "InitialPullDone",
                 "SqlEntryValue": "False",
                 "SqlGroup": "SolutionTemplate",
@@ -175,7 +175,7 @@
             {
                 "displayname": "$translate(NOTIFIER_CONFIGURE_NOTIFIER_APP)",
                 "name": "Microsoft-ConfigureNotifier",
-                "SqlConfigTable": "[cc].[configuration]"
+                "SqlConfigTable": "[wf].[configuration]"
             },
             {
                 "ASDatabase": "CreditCollections",
@@ -221,7 +221,7 @@
                     "asServer": "$ds(ASServerUrl)",
 
                     "connStringSql": "$dsall(SqlConnectionString)[0]",
-                    "schema": "[cc]",
+                    "schema": "[wf]",
                     "databaseAS": "CreditCollections",
                     "functionName": "$run('asscheduler' + this.MS.DataStore.getValue('uniqueId'))"
                 },
