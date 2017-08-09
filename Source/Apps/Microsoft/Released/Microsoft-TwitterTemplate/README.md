@@ -1,12 +1,12 @@
-Brand & Campaign Management Solution Template Documentation
+ブランド＆キャンペーン管理ソリューションテンプレート
 ===========================================================
 
-# Table of Contents
-1. [Introduction](#introduction)
-2. [Architecture](#architecture)
-3. [System Requirements](#system-requirements)
-4. [How to Install](#how-to-install)
-5. [Architecture Deep Dive](#architecture-deep-dive)
+# コンテンツ
+1. [概要](#概要)
+2. [アーキテクチャ](#アーキテクチャ)
+3. [システム要件](#システム要件)
+4. [インストール方法](#インストール方法)
+5. [アーキテクチャ詳細](#アーキテクチャ詳細)
 6. [Model Schema](#model-schema)
 7. [Reports Walkthrough](#report-walkthrough)
 8. [Customizations](#customizations)
@@ -14,7 +14,7 @@ Brand & Campaign Management Solution Template Documentation
 
 
 
-### Introduction
+### 概要
 
 The Twitter template spins up a complete brand/campaign solution. It stands up an end-to-end solution that pulls data from Twitter, enriches the data using machine learning and stores it in Azure SQL. Users can then use pre-built Power BI reports that leverage Microsoft research technology to start analyzing their Twitter data and augmenting it with additional data sources.
 
@@ -30,7 +30,7 @@ The template lets you do things like:
 
 The following document provides a walkthrough of the architecture, a deep dive into every component, comments on customizability as well as information on additional topics like pricing. For any questions not covered in this document, please contact the team at <PBISolnTemplates@microsoft.com>
 
-### Architecture
+### アーキテクチャ
 
 ![Image](Resources/media/image46.png)
 
@@ -58,7 +58,7 @@ Setting up the template requires the following:
 
 -   Twitter Account
 
-### How to Install
+### インストール方法
 
 Before diving into the components of the solution, we will go through how to set things up. To get started with the solution, navigate to the [Twitter template page](https://powerbi.microsoft.com/en-us/solution-templates/brand-management-twitter) and click **Install Now**.
 
@@ -129,7 +129,7 @@ The credentials provided are used as the system administrator for the Azure Anal
 
 ![Image](Resources/media/image12.png)
 
-Architecture Deep Dive
+アーキテクチャ詳細
 ======================
 
 The following section will break down how the template works by going through all the components of the solution.
