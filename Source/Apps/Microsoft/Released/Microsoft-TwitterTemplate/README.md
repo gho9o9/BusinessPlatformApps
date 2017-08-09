@@ -1,4 +1,4 @@
-ブランド＆キャンペーン管理ソリューションテンプレート
+ブランド＆キャンペーン管理ソリューションテンプレート（Twitterテンプレート）
 ===========================================================
 
 # コンテンツ
@@ -7,28 +7,26 @@
 3. [システム要件](#システム要件)
 4. [インストール方法](#インストール方法)
 5. [アーキテクチャ詳細](#アーキテクチャ詳細)
-6. [Model Schema](#model-schema)
-7. [Reports Walkthrough](#report-walkthrough)
-8. [Customizations](#customizations)
-9. [Estimated Costs](#estimated-costs)
+6. [スキーマ構造](#スキーマ構造)
+7. [レポート解説](#レポート解説)
+8. [カスタム方法](#カスタム方法)
+9. [コスト見積り](#コスト見積り)
 
 
 
 ### 概要
 
-The Twitter template spins up a complete brand/campaign solution. It stands up an end-to-end solution that pulls data from Twitter, enriches the data using machine learning and stores it in Azure SQL. Users can then use pre-built Power BI reports that leverage Microsoft research technology to start analyzing their Twitter data and augmenting it with additional data sources.
+Twitterテンプレートは、ブランド/キャンペーンを管理します。これは、Twitterから取得したデータを機械学習にかけ、結果をAzure SQLに格納するエンドツーエンドのソリューションです。またPower BIレポートは事前構築済みです。
 
-The template is aimed at anyone who is interesting in analyzing Twitter data. It supports multiple personas ranging from a marketing manager monitoring the success of their campaign to a ministry official interested in tracking the public’s reactions on social media.
+このテンプレートは、Twitterのデータを分析するのに興味のある人を対象としています。マーケティングマネージャーから、キャンペーンの成功を監視して、ソーシャルメディアに対する一般の反応を追跡することに関心を持つ省庁の役人まで、複数の人物をサポートしています。
 
-The template lets you do things like:
+このテンプレートを使用すると、次のようなことができます。
 
--   Understand what aspects of your product/campaign/event are well received and immediately spot the biggest concerns and pain points
+ - あなたの製品/キャンペーン/イベントのどの側面がうまく理解されているかを理解し、すぐに最大の懸念事項と苦労点を見つけます
 
--   Track what topics are trending and how that changes across time
+ - どのトピックがトレンドであり、どのように変化しているかを追跡する
 
--   Identify your biggest influencers fans and critics
-
-The following document provides a walkthrough of the architecture, a deep dive into every component, comments on customizability as well as information on additional topics like pricing. For any questions not covered in this document, please contact the team at <PBISolnTemplates@microsoft.com>
+ - あなたの最大の影響力のファンと批評家を特定する
 
 ### アーキテクチャ
 
@@ -461,7 +459,7 @@ At this point we have collected all the information we need. We just need to wri
 
 
 
-### Model Schema
+### スキーマ構造
 
 
 Here is an overview of the tables found in the model:
@@ -556,7 +554,7 @@ Below is a breakdown of the columns found in every table (*DAX measures and Calc
 | User Total Tweets | How many tweets did the tweet author tweet                                                                             |
 | Username          | Twitter handle of the author (if the tweet is a retweet then the author is the retweet author not the original poster) |
 
-Report Walkthrough
+レポート解説
 ------------------
 
 The following section walks through each report page outlining the intent of the page. Throughout the Twitter reports the template will often reference the ‘direction’ of a tweet. As a reminder, here is the outline of the direction definitions:
@@ -654,7 +652,7 @@ Clicking on a tweet will cross filter the ‘influence’ stats on the left hand
 
 ![Image](Resources/media/image44.png)
 
-### Customizations
+### カスタム方法
 
 Updating the Solution
 ---------------------
@@ -696,30 +694,30 @@ The Python script inside the Azure Function is completely customizable. You can 
 
 Other examples could be to add [Cognitive APIs](https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/) to do things like topic or keyword extraction on top of the twitter data.
 
-### Estimated Costs
+### コスト見積り
 
-Here is an estimate of the Azure costs (Logic App, Azure Function, Azure SQL, Azure ML) based on the number of tweets processed:
+処理されたツイートの数に基づく、Azureコスト（Logic App、Azure Function、Azure SQL、Azure ML）の目安を示します。
 
-Processing 10K tweets a month will cost approximately $160
+1か月に10,000のツイート処理の場合：およそ160ドル
 
-Processing 50K tweets a month will cost approximately $265
+1か月に50,000のツイート処理の場合：およそ265ドル
 
-Processing 100K tweets a month will cost approximately $335
+1か月に100,000のツイート処理の場合：およそ335ドル
 
-Please keep in mind these are **estimated costs and subject to change.** For a more detailed breakdown of the various components please refer to the [Azure calculator](https://azure.microsoft.com/en-us/pricing/calculator/) and select Logic App, Azure Function, Azure SQL and Azure ML. You can tweak all the options to see what the costs will look like and what modifications may suit your needs best.
+これらは目安であり変更される可能性があることに注意してください。
+より詳細には[Azure calculator](https://azure.microsoft.com/en-us/pricing/calculator/)にて、Logic App、Azure Function、Azure SQL、Azure MLを選択、すべてのオプションを調整し、コストがどのように表示され、どのような調整がニーズに最も適しているかを確認してください。
 
-The following defaults are set for you in the template (you can modify any of these after things get set up):
+上記のコスト目安は以下の構成を前提にしています（これらは後で変更が可能です）。
 
 -   Azure SQL: Standard S1
 
 -   App Service Plan: Dynamic
 
--   Logic Apps (trigger set for every 3 minutes)
+-   Logic Apps (3分おきのトリガーセット)
 
 -   Azure Functions
 
 -   Azure ML (S1)
 
-For example, if you know you will be processing very few tweets a month, you could change the SQL Server from S1 to Basic. In that case you could bring down the costs of processing 10K tweets a month from about $160 to about $130.
-
-Whilst the default setting should cater to most twitter template requirements, we encourage you to familiarize yourself with the various pricing options and tweak things to suit your needs.
+たとえば、1か月のツイート処理が10,000未満である場合にSQL ServerをS1からBasicに変更するとおよそ160ドルからおよそ130ドルまでコストを引き下げることができます。
+さまざまな価格設定オプションに慣れて、ニーズに合わせた調整をおすすめします。
